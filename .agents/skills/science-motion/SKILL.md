@@ -1,36 +1,44 @@
 ---
 name: science-motion
-description: AI filmmaking guidance for connected Chinese motion-graphic explainers using Remotion, SVG and strict QA.
+description: Style-agnostic AI production guidance for science and educational animation, including storyboard, Remotion/SVG examples, audio and iterative QA.
 ---
 
 # Science Motion Skill
 
-## Script and design
-For every idea, write a visual state diagram with initial state, transformation, and conclusion.
-Visual objects must *persist* across conceptual transitions. Morph, connect or move objects instead of swapping slides.
-Every line must have a narrative reason, target coordinates, timing (seconds and frames), and visual explanation.
-Use dark ink, warm ivory, patinated gold, muted green; no random accent colors.
+## Art direction is project-specific
+There is NO required Chinese aesthetic, four-color palette, cinematic treatment, continuous camera, SVG geometry or prohibition on slide-style cuts.
+Determine art direction from the specific story, target viewers, user preferences and distribution format. Refer to docs/STYLE_SYSTEM.md.
+Existing `content/film.json` and `src/ScienceFilm.tsx` are ONE dark-ink 9:16 **demo**, not a template that every future project must imitate.
+Do not make unrelated topics look alike unless the user requests a consistent series identity.
 
-## Geometry
-Canonical design space is SVG viewBox 0 0 1080 1920. Reserve upper ~190px and bottom ~100px margins.
-Subtitle safe rect: x 100..980 and y 1620..1800. Keep diagram labels and lines outside it.
-No illegible 24px text; subtitle length ideally <=18 Hanzi per line. If longer, split into two timed cues.
-Keep edge anchors on-screen during movement; inspect intermediate frames, not only cut boundaries.
+## Design and narrative
+- Write the intended takeaway of each scene and how the visual communicates it.
+- Decide scene-to-scene motion according to meaning: persistent objects can morph or move; purposeful hard cuts, cards and staged slides are also acceptable.
+- Use accurate diagrams with aligned nodes, connected anchors, readable labels and no false relationships.
+- Select fonts, colors, level of detail and graphic style for the individual video, maintaining hierarchy and contrast.
+- Set canvas width/height, aspect ratio, layout grid and subtitle safe area *per composition*, including required platform UI overlays.
+- Time each spoken segment to a narration cue; account for pacing and on-screen reading time.
+
+## Animation
+- Remotion is the default proven renderer for code-driven projects; specialized Manim, Motion Canvas, Blender, 3D and image/video workflows may be used as content requires.
+- Prefer deterministic frame-based animation for reproducible GitHub Actions renders.
+- Inspect intermediate frames during movement, not only initial/final poses.
+- Do not replace deliberate artistic choices with generic automated transitions.
 
 ## Rendering QA
-1. Typecheck and verify timestamps before rendering.
-2. Render with local assets only, never request unsourced remote copyrighted media inside the composition.
-3. Inspect contact sheet *and* sample transitions. Check alignment, flow of meaning, subtitle collisions, clipping and flashes.
-4. Fix specific defects; rerender; repeat QA until clean.
-5. Run ffprobe to verify H264 audio/video/duration. A successful command is NOT proof of visual correctness.
+1. Typecheck/probe and verify source timings before rendering.
+2. Use local assets with verified ownership/licenses.
+3. Review a contact sheet, key moments AND representative transition frames, including on-screen composition and typography.
+4. Repair overlapping captions, clipped objects, unintended layer order, abrupt transitions and sync issues. Rerender; visually inspect again.
+5. Verify video/audio codecs and duration with ffprobe. Technical success never substitutes for visual review.
+6. Distinguish a technical smoke test from a finished publishable video.
 
 ## Audio
-Generate score separately from final encoding. Never equate technical music generation with rights clearance.
-Narration should remain intelligible (sidechain duck music under speech). Avoid clipping and abrupt audio boundaries.
-Use auditable license/source notes for imported tracks and voice models.
-GitHub-hosted standard runners are for CPU render/mix; use local GPU or paid GPU runner for generative music model inference.
+Create the score according to the project's desired emotional arc, not a universal "guqin" sound.
+Generate music separately from muxing; record license/model provenance for all audio assets.
+Mix for intelligible dialogue, with sidechain ducking as appropriate. Inspect audio transitions and ending fades.
+Cloud standard runners handle rendering/mixing; run large generative models locally or on a dedicated GPU runner.
 
 ## Agent behavior
-A single agent writes code and assets; Actions reads and validates.
-Never commit API secrets, model weights, tokenized URLs, generated private voice audio, or huge binaries.
-Do not invent completion/QA results; cite run and artifact when actually verified.
+One write agent; Actions reads/validates. Never commit tokens, passwords, model weights, copyrighted media without permission or private recordings.
+Report only checks and artifacts actually completed.

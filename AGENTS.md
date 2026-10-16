@@ -1,34 +1,41 @@
 # Video Creation — Working Instructions for Agents
 
-This is the only write target for video production code, custom skills, sound design, scripts, QA and GitHub Actions.
+This is the only write target for video production code, project-scoped skills, sound design, scripts, QA and GitHub Actions.
 Never write video artifacts or workflows into unrelated repositories (e.g. OrthoKB).
 
-## Mandatory process
-1. Interpret the factual thesis; confirm the source and the intended audience.
-2. Storyboard as a *continuous spatial world* with visual cause and effect, not slide transitions.
-3. Design at 1080×1920 logical SVG coordinates; respect 9:16 layout and subtitle safe area.
-4. Use Remotion frame-driven animation (no CSS animations/transitions).
-5. Prepare authorized/licensed voice and music sources; record provenance.
-6. Render, sample >=5 keyframes, inspect contact sheet and motion across transitions.
-7. Repair text collisions, off-screen geometry, timing, abrupt cuts and subtitle overlap.
-8. Rerender and inspect again; deliver only a visually inspected run artifact.
-9. GitHub Actions is read-only with respect to Git contents; agents edit source on one branch only.
+## Production principles
+- **The pipeline is style-agnostic.** A previous Chinese ink / cinematic / minimalist geometry demo is one optional art direction, NOT the house style.
+- For each new video, derive an art direction from its subject matter, audience, emotional intent, platform and user-supplied examples. Do not silently reuse a previous video's look.
+- Continuous spatial transformation, straight cuts, animated cards, slide transitions, 2D illustration, 3D visualization, typography and live-action composites are all valid **when they communicate clearly**. Do not impose an absolute "no PowerPoint" rule; avoid careless, unmotivated transitions.
+- Favor narrative accuracy, legibility, consistent visual hierarchy and intentional movement over adherence to a fixed palette or technique.
+- Technical implementation may change by project. Remotion is the working baseline, not a mandate to use SVG or 9:16 for every output.
+- When no visual direction is specified, select a suitable direction based on the script; document it in a short style brief instead of assuming Chinese aesthetics.
 
-## Creative direction
-Dark ink / bronze / rice-paper highlights, restrained 4-color design.
-Camera continuity; graph morphs, flowing geometry and evolving scientific diagrams.
-Avoid 'dynamic PowerPoint' cards and unrelated decoration.
-Use enough visual explanation to justify each transition.
+## Mandatory process
+1. Identify the scientific/educational thesis, supporting sources, audience, delivery platform, resolution, aspect ratio, language and desired tone.
+2. Create a per-project style brief (color palette, type, illustration/3D approach, movement grammar, references, audio approach). If the brief leaves style open, select a coherent fit for the content.
+3. Plan scenes and transitions by visual cause-and-effect or deliberate editorial cuts, as warranted by the content.
+4. Define a composition-specific layout and subtitle safe area. Never treat the 1080×1920 logical SVG canvas or demo caption box as universal.
+5. Animate with the framework suited to the brief; Remotion frame-driven code is the starter implementation.
+6. Prepare authorized/licensed voice and music sources; record provenance.
+7. Render and inspect representative frames **plus in-between transition frames**, motion, audio and continuity. Sample at least five keyframes where duration warrants it.
+8. Repair text collisions, edge clipping, wrong visual anchors, poor timing, audio masking, and subtitle overlap. Rerender and inspect again.
+9. GitHub Actions reads and validates video content; one agent writes changes to a branch at a time. Do not commit credentials or private voice files.
+10. Deliver a video artifact only after inspection. Passing a codec/type check is not proof of artistic correctness.
+
+## Style-selection reference
+Read [Style system](docs/STYLE_SYSTEM.md) before authoring a new film.
+Potential approaches: Chinese ink cinematic, modern MG, geometric explainer, illustrated editorial, hand-drawn, motion typography, realistic 3D anatomy, interface/demo, documentary, mixed-media. This list is illustrative, not exhaustive.
 
 ## Source of truth
-- src/: frame-based geometry and compositions
-- content/: scripts/cue timelines/metadata
-- assets/audio/: authorized music and narration supplied by the owner for public cloud builds (public repository; verify rights and consent)
-- public/audio/: local-only private narration (gitignored, not accessible to hosted Actions)
+- src/: frame-based animation and compositions
+- content/: scripts, cues, scene definitions, project-specific style briefs
+- assets/audio/: owner-authorized audio for public cloud builds (this repository is public)
+- public/audio/: local-only/private narration, gitignored
 - scripts/: rendering, music, mixing and verification
-- .agents/skills/: repository-local instructions for coding agents
+- .agents/skills/: project-scoped instruction modules
 - .github/workflows/: reproducible rendering/QA
 - out/: generated artifacts, never committed
 
-Read .agents/skills/science-motion/SKILL.md before producing any video.
-For Remotion upstream guidance: https://github.com/remotion-dev/skills
+Read .agents/skills/science-motion/SKILL.md before producing a science explainer.
+For upstream Remotion guidance: https://github.com/remotion-dev/skills
