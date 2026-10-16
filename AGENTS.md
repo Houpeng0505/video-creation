@@ -38,4 +38,5 @@ Potential approaches: Chinese ink cinematic, modern MG, geometric explainer, ill
 - out/: generated artifacts, never committed
 
 Read .agents/skills/science-motion/SKILL.md before producing a science explainer.
+Read .agents/skills/director-critic/SKILL.md for narrative animation, camera choreography and independent frame-review requirements.
 For upstream Remotion guidance: https://github.com/remotion-dev/skills
