@@ -1,0 +1,52 @@
+name: Benchmark Opus rendering method - Three.js GSAP HyperFrames
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/opus-method/**'
+      - '.github/workflows/benchmark-opus-method.yml'
+permissions:
+  contents: read
+concurrency:
+  group: opus-method-main
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: experiments/opus-method
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install FFmpeg Chromium and fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg chromium fonts-noto-cjk
+      - name: Install and bundle dependencies
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Geometry regression test across 181 frames
+        run: npm test
+      - name: Render JS/Three.js scene through HyperFrames
+        run: |
+          mkdir -p out
+          npx -y hyperframes@0.8.96 render -f 30 -q high -w 1 -o out/opus-3d-benchmark.mp4
+      - name: Verify and extract images
+        run: |
+          ffprobe -v error -show_streams -show_format -of json out/opus-3d-benchmark.mp4 > out/metadata.json
+          ffmpeg -hide_banner -loglevel error -y -i out/opus-3d-benchmark.mp4 -vf "fps=2,scale=240:427,tile=4x3" -frames:v 1 out/contact-sheet.jpg
+          for t in 0.4 1.8 3.1 3.4 4.4 5.7; do ffmpeg -hide_banner -loglevel error -y -ss "$t" -i out/opus-3d-benchmark.mp4 -frames:v 1 "out/frame-$t.png"; done
+          python3 -c 'import json; d=json.load(open("out/metadata.json")); assert abs(float(d["format"]["duration"])-6)<1.0; assert any(s.get("codec_name")=="h264" for s in d["streams"]); print("PASS 6s MP4")'
+      - name: Upload source-independent rendered QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: opus-threejs-method-prototype
+          path: experiments/opus-method/out/*
+          retention-days: 14
+          if-no-files-found: error
