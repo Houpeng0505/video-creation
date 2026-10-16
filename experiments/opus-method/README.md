@@ -12,3 +12,6 @@ Sources: https://github.com/heygen-com/hyperframes
 https://github.com/JohnHeibel/ClaudeAnimationBase
 https://github.com/VisualxIntelligence/motion-tools-and-skills/blob/main/SOURCES.md
 https://github.com/bilaldemirerr/opus-video-recipes
+
+## Verified pilot V1 result
+GitHub Actions run 38954172935 passed: 6.000 seconds, 720x1280, 30 fps, H.264; geometry assertions succeeded, MP4 and 2-fps contact sheet inspected. The result is *not* an Opus-grade example: cylinder/sphere-based human anatomy still looks like a mannequin, the walk cycle is essentially absent (feet slide), the rock/ground occlusion needs a more grounded camera/geometry treatment, and the scene has limited narrative detail. This proves that replacing Remotion/SVG with Three.js/HyperFrames alone does NOT solve scene design or acting. After inspecting that render, stone surface contact constraint has been strengthened to exact boulder radius and regression-tested in the followup.
