@@ -11,4 +11,6 @@ export const Root:React.FC=()=><>
     durationInFrames={Math.round(film.durationSeconds*30)}/>
   <Composition id="Sisyphus" component={SisyphusFilm} fps={30} width={720} height={1280}
     durationInFrames={Math.round(sisyphus.durationSeconds*30)}/>
+  <Composition id="SisyphusV2" component={SisyphusV2} fps={30} width={720} height={1280}
+    durationInFrames={Math.round(v2.durationSeconds*30)}/>
 </>;

@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 OUT=Path("out");CFG=json.loads(Path("content/sisyphus.json").read_text(encoding="utf-8"))
 
-def score():
+def score(v2=False):
     OUT.mkdir(exist_ok=True)
     sr=24000;n=90*sr;track=np.zeros(n,dtype=np.float64)
     def tone(start,duration,hz,gain,decay=1.0):
@@ -22,7 +22,7 @@ def score():
         tone(s,2.3,hz,.078 if s>64 else .067,3.4)
     for s in np.arange(0,90,3.4):tone(s,.94,55 if s<60 else 65.4,.068,5)
     rng=np.random.default_rng(1311)
-    for start,gain in [(23.9,.22),(25.1,.23),(27.1,.12),(28.7,.11),(33,.13),(77.9,.08)]:
+    for start,gain in ([(18.0,.16),(18.7,.23),(19.8,.14),(21,.13),(22.8,.16),(78.1,.13)] if v2 else [(23.9,.22),(25.1,.23),(27.1,.12),(28.7,.11),(33,.13),(77.9,.08)]):
         a=int(start*sr);b=min(n,a+int(2.8*sr));x=np.arange(b-a)/sr
         white=rng.normal(0,1,len(x));heavy=np.cumsum(white);heavy/=np.max(np.abs(heavy))+1e-9
         track[a:b]+=gain*np.exp(-x*5)*(.55*heavy+.45*np.sin(2*np.pi*(40-9*x)*x))
@@ -72,6 +72,7 @@ if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("--score-only",action="store_true")
     p.add_argument("--voice-only",action="store_true")
+    p.add_argument("--v2",action="store_true")
     a=p.parse_args()
-    if not a.voice_only:score()
+    if not a.voice_only:score(a.v2)
     if not a.score_only:asyncio.run(voice())
