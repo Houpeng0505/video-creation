@@ -1,0 +1,138 @@
+{
+  "title": "推石者：荒诞中的英雄",
+  "durationSeconds": 90,
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "style": "mythic engraved cinematic",
+  "voice": "zh-CN-YunyangNeural",
+  "source": "Albert Camus The Myth of Sisyphus; Stanford Encyclopedia of Philosophy Albert Camus",
+  "notes": "Giant-scale depiction is a visual metaphor; Sisyphus in Greek mythology was not literally a giant.",
+  "captions": [
+    {
+      "start": 0,
+      "end": 6,
+      "text": "想象一个人，被命运判处一种刑罚。",
+      "lines": [
+        "想象一个人，",
+        "被命运判处一种刑罚。"
+      ]
+    },
+    {
+      "start": 6,
+      "end": 12,
+      "text": "他必须将一块巨石，永远推向山顶。",
+      "lines": [
+        "他必须将一块巨石，",
+        "永远推向山顶。"
+      ]
+    },
+    {
+      "start": 12,
+      "end": 18,
+      "text": "每当他用尽全力，终于接近终点，",
+      "lines": [
+        "每当他用尽全力，",
+        "终于接近终点，"
+      ]
+    },
+    {
+      "start": 18,
+      "end": 24,
+      "text": "巨石就会轰然滚落，一切重新开始。",
+      "lines": [
+        "巨石就会轰然滚落，",
+        "一切重新开始。"
+      ]
+    },
+    {
+      "start": 24,
+      "end": 30,
+      "text": "没有胜利，没有奖赏，也没有真正的结束。",
+      "lines": [
+        "没有胜利，没有奖赏，",
+        "也没有真正的结束。"
+      ]
+    },
+    {
+      "start": 30,
+      "end": 36,
+      "text": "在希腊神话里，他叫西西弗斯。",
+      "lines": [
+        "在希腊神话里，",
+        "他叫西西弗斯。"
+      ]
+    },
+    {
+      "start": 36,
+      "end": 43,
+      "text": "这看起来，是世上最残酷的徒劳。",
+      "lines": [
+        "这看起来，",
+        "是世上最残酷的徒劳。"
+      ]
+    },
+    {
+      "start": 43,
+      "end": 50,
+      "text": "可哲学家加缪，却把他看作荒诞的英雄。",
+      "lines": [
+        "可哲学家加缪，",
+        "却把他看作荒诞的英雄。"
+      ]
+    },
+    {
+      "start": 50,
+      "end": 57,
+      "text": "所谓荒诞，是人渴望意义，而世界沉默不答。",
+      "lines": [
+        "所谓荒诞，是人渴望意义，",
+        "而世界沉默不答。"
+      ]
+    },
+    {
+      "start": 57,
+      "end": 64,
+      "text": "石头总会落下，这是他无法改变的命运。",
+      "lines": [
+        "石头总会落下，",
+        "这是他无法改变的命运。"
+      ]
+    },
+    {
+      "start": 64,
+      "end": 71,
+      "text": "但下一步是否迈出，仍然由他自己决定。",
+      "lines": [
+        "但下一步是否迈出，",
+        "仍然由他自己决定。"
+      ]
+    },
+    {
+      "start": 71,
+      "end": 78,
+      "text": "他看清了困境，却没有把自己交给绝望。",
+      "lines": [
+        "他看清了困境，",
+        "却没有把自己交给绝望。"
+      ]
+    },
+    {
+      "start": 78,
+      "end": 85,
+      "text": "反抗不是保证成功，而是拒绝被结局定义。",
+      "lines": [
+        "反抗不是保证成功，",
+        "而是拒绝被结局定义。"
+      ]
+    },
+    {
+      "start": 85,
+      "end": 90,
+      "text": "这就是，清醒之后，仍然向前。",
+      "lines": [
+        "这就是，清醒之后，",
+        "仍然向前。"
+      ]
+    }
+  ]
+}

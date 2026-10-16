@@ -1,0 +1,66 @@
+name: Sisyphus 90s film - Mandarin voice, music and QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/SisyphusFilm.tsx'
+      - 'src/Root.tsx'
+      - 'content/sisyphus.json'
+      - 'scripts/sisyphus_*.py'
+      - '.github/workflows/sisyphus.yml'
+permissions:
+  contents: read
+concurrency:
+  group: sisyphus-film-main
+  cancel-in-progress: true
+jobs:
+  film:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CJK fonts and media tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: Install Remotion and speech dependencies
+        run: |
+          npm install --no-audit --no-fund
+          python -m pip install -r requirements.txt "edge-tts>=7,<10" "pydub==0.25.1"
+          npx remotion browser ensure
+      - name: TypeScript safety validation
+        run: npm run typecheck
+      - name: Mandarin narration and original cinematic score
+        run: python scripts/sisyphus_audio.py
+      - name: Render 90-second mythic animation
+        run: |
+          mkdir -p out
+          npx remotion render src/index.ts Sisyphus out/sisyphus_silent.mp4 --codec h264 --crf 18 --concurrency 2 --log=error
+      - name: Mix speech and score with ducking
+        run: bash scripts/mix_audio.sh out/sisyphus_silent.mp4 out/sisyphus_music.wav out/sisyphus_final.mp4 out/sisyphus_voice.wav
+      - name: Verify and capture QA frames
+        run: python scripts/sisyphus_qc.py
+      - name: Build all-scenes contact sheet
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -i out/sisyphus_final.mp4 -vf "fps=1/7.5,scale=240:427,tile=4x3" -frames:v 1 out/sisyphus_qa/contact-sheet.jpg
+          ffprobe -v error -show_streams -show_format -of json out/sisyphus_final.mp4 > out/sisyphus_qa/metadata.json
+      - name: Export film and full QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: sisyphus-90s-complete
+          path: |
+            out/sisyphus_final.mp4
+            out/sisyphus_voice_report.json
+            out/sisyphus_qa/*.jpg
+            out/sisyphus_qa/metadata.json
+            out/sisyphus_qa/frame-*.png
+            out/sisyphus_qa/transition-*.png
+          retention-days: 14
+          if-no-files-found: error
