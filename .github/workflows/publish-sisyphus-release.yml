@@ -1,0 +1,48 @@
+name: Publish permanent Sisyphus V2 video download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-sisyphus-release.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Retrieve verified V2 movie from existing Actions artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p /tmp/sisyphus-publish
+          gh run download 38929550942 --name sisyphus-v2-review --dir /tmp/sisyphus-publish
+          find /tmp/sisyphus-publish -maxdepth 2 -type f -printf '%p %s bytes\n'
+          test -s /tmp/sisyphus-publish/sisyphus_v2.mp4
+          cp /tmp/sisyphus-publish/sisyphus_v2.mp4 /tmp/sisyphus-publish/sisyphus-v2-90seconds.mp4
+      - name: Publish non-expiring public GitHub Release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if gh release view sisyphus-v2.0 >/dev/null 2>&1; then
+            gh release upload sisyphus-v2.0 /tmp/sisyphus-publish/sisyphus-v2-90seconds.mp4 --clobber
+          else
+            gh release create sisyphus-v2.0 /tmp/sisyphus-publish/sisyphus-v2-90seconds.mp4 \
+              --target "${GITHUB_SHA}" \
+              --title "推石者：荒诞中的英雄 — V2（90秒）" \
+              --notes "修订后的西西弗斯哲学科普动画。90秒，中文旁白与配乐。解决原V1长时间重复镜头、坠落动作与旁白错位、迈步/反抗未视觉化等问题。此版本仍可继续美术精修。直接下载MP4，无需通过ChatGPT临时沙盒附件；发布资产随GitHub Release保留。"
+          fi
+          gh release view sisyphus-v2.0 --json url,assets
+      - name: Validate stable public download URL
+        run: |
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/sisyphus-v2.0/sisyphus-v2-90seconds.mp4"
+          echo "Permanent video download: $URL"
+          curl -fsSIL --max-time 40 "$URL" -o /tmp/sisyphus-headers.txt
+          head -n 16 /tmp/sisyphus-headers.txt
