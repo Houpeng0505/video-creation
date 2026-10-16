@@ -23,6 +23,7 @@ def validate_content(path: Path) -> dict:
         assert len(cue["text"]) <= 22, f"Caption needs shortening: {cue['text']}"
         previous_end = cue["end"]
     print(f"PASS content schema: {len(cfg['captions'])} nonoverlapping captions")
+    return cfg
 
 
 def probe(path: Path) -> dict:
