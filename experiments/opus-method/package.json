@@ -1,0 +1,14 @@
+{
+  "name": "opus-code-render-pilot",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "esbuild scene.js --bundle --format=iife --target=es2022 --outfile=dist/scene.js",
+    "test": "node test.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.14.1",
+    "three": "0.181.2",
+    "esbuild": "0.25.12"
+  }
+}
