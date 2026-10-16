@@ -8,6 +8,7 @@ on:
       - 'src/Root.tsx'
       - 'content/sisyphus.json'
       - 'scripts/sisyphus_*.py'
+      - 'scripts/mix_audio.sh'
       - '.github/workflows/sisyphus.yml'
 permissions:
   contents: read
