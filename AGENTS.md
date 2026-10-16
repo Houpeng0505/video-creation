@@ -23,7 +23,8 @@ Use enough visual explanation to justify each transition.
 ## Source of truth
 - src/: frame-based geometry and compositions
 - content/: scripts/cue timelines/metadata
-- public/audio/: optional authorized narration (not tracked by default)
+- assets/audio/: authorized music and narration supplied by the owner for public cloud builds (public repository; verify rights and consent)
+- public/audio/: local-only private narration (gitignored, not accessible to hosted Actions)
 - scripts/: rendering, music, mixing and verification
 - .agents/skills/: repository-local instructions for coding agents
 - .github/workflows/: reproducible rendering/QA

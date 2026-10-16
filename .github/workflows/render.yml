@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/**'
       - 'content/**'
+      - 'assets/audio/**'
       - 'scripts/**'
       - 'package.json'
       - 'requirements.txt'
@@ -44,12 +45,20 @@ jobs:
         run: |
           npm run typecheck
           python scripts/qc.py --config content/film.json
-      - name: Generate original placeholder soundtrack
-        run: python scripts/generate_score.py --duration 25 --output out/music.wav
+      - name: Resolve licensed score or synthesize test placeholder
+        run: |
+          mkdir -p out
+          if [[ -f assets/audio/music.wav ]]; then
+            cp assets/audio/music.wav out/music.wav
+            echo "Using user-supplied soundtrack; verify its rights before public distribution."
+          else
+            duration=$(python -c 'import json; print(json.load(open("content/film.json"))["durationSeconds"])')
+            python scripts/generate_score.py --duration "$duration" --output out/music.wav
+          fi
       - name: Render geometry and captions
         run: npm run render
       - name: Add music and optional licensed narration
-        run: bash scripts/mix_audio.sh out/silent.mp4 out/music.wav out/final.mp4 public/audio/narration.wav
+        run: bash scripts/mix_audio.sh out/silent.mp4 out/music.wav out/final.mp4 assets/audio/narration.wav
       - name: Media inspection and representative frames
         run: |
           python scripts/qc.py --config content/film.json --video out/final.mp4

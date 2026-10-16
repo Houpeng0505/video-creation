@@ -11,3 +11,5 @@ __pycache__/
 public/audio/*.wav
 public/audio/*.mp3
 !public/audio/.gitkeep
+
+vendor/
