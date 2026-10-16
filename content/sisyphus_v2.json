@@ -1,0 +1,314 @@
+{
+  "title": "推石者：荒诞中的英雄 V2",
+  "durationSeconds": 90,
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "scriptLocked": true,
+  "notes": "14 distinct semantic shots, not titles over one repeated uphill shot. Scenes and cues have a one-to-one time contract; manual frame inspection required.",
+  "style": "engraved mythic cinema; closeups, Greek historical relief, modern philosophy study, abstract diagrams, dawn mountain epic",
+  "captions": [
+    {
+      "start": 0,
+      "end": 6,
+      "text": "想象一个人，被命运判处一种刑罚。",
+      "lines": [
+        "想象一个人，",
+        "被命运判处一种刑罚。"
+      ],
+      "visual": {
+        "shot_id": 1,
+        "time": "00-06",
+        "name": "命运判决",
+        "claim": "不可撤销的刑罚",
+        "description": "巨石像一颗被锁链悬置的星球压在渺小身影头上；链节逐个绷紧",
+        "in": "巨石正悬上方，人物在地面",
+        "camera": "牢笼与巨物向画面中心压缩",
+        "synchronization": "旁白判罚出现时链条闭合",
+        "acceptance": "物体尺寸：石头大于人3倍；字幕不压人物"
+      }
+    },
+    {
+      "start": 6,
+      "end": 12,
+      "text": "他必须将一块巨石，永远推向山顶。",
+      "lines": [
+        "他必须将一块巨石，",
+        "永远推向山顶。"
+      ],
+      "visual": {
+        "shot_id": 2,
+        "time": "06-12",
+        "name": "永远上山",
+        "claim": "任务是把石头向山顶推",
+        "description": "全景长坡，石头与人沿真实接触位置缓缓爬升；山顶在远方",
+        "in": "锁链的弧形轮廓匹配剪切为山脊",
+        "camera": "镜头后撤显示山脊和剩余路程",
+        "synchronization": "石头和人实际位置随进度改变",
+        "acceptance": "碰撞接触与滚动角同步"
+      }
+    },
+    {
+      "start": 12,
+      "end": 18,
+      "text": "每当他用尽全力，终于接近终点，",
+      "lines": [
+        "每当他用尽全力，",
+        "终于接近终点，"
+      ],
+      "visual": {
+        "shot_id": 3,
+        "time": "12-18",
+        "name": "拼尽力气",
+        "claim": "付出的努力真实且艰难",
+        "description": "极近景手掌挤压石面、脚尖蹬入地面、岩屑振落；强调具体劳动",
+        "in": "匹配前镜中石面的划痕",
+        "camera": "推近至手掌与裂纹",
+        "synchronization": "肌肉与脚跟互为施力链",
+        "acceptance": "手/石接触真实；动作清楚"
+      }
+    },
+    {
+      "start": 18,
+      "end": 24,
+      "text": "巨石就会轰然滚落，一切重新开始。",
+      "lines": [
+        "巨石就会轰然滚落，",
+        "一切重新开始。"
+      ],
+      "visual": {
+        "shot_id": 4,
+        "time": "18-24",
+        "name": "石头崩落",
+        "claim": "刚刚接近顶端，就必须重来",
+        "description": "陡峭全景，石头从人物前方脱离并沿山坡迅速滚下，扬起尘土",
+        "in": "手从石头上滑落后切全景",
+        "camera": "跟拍下落岩石，人物留在坡顶",
+        "synchronization": "旁白‘轰然滚落’时必须看见滚落",
+        "acceptance": "关键因果与旁白同步"
+      }
+    },
+    {
+      "start": 24,
+      "end": 30,
+      "text": "没有胜利，没有奖赏，也没有真正的结束。",
+      "lines": [
+        "没有胜利，没有奖赏，",
+        "也没有真正的结束。"
+      ],
+      "visual": {
+        "shot_id": 5,
+        "time": "24-30",
+        "name": "没有奖赏",
+        "claim": "循环不产生外部成果",
+        "description": "镜头上升俯视山坡与山顶空旷基座；重复轨迹叠加成闭环",
+        "in": "下落岩石的轨迹接续画面中的一圈",
+        "camera": "拉高成俯视，山顶停留空无一物",
+        "synchronization": "没有胜利时出现空平台，无尽循环可见",
+        "acceptance": "独立新信息：终点永远被清空"
+      }
+    },
+    {
+      "start": 30,
+      "end": 36,
+      "text": "在希腊神话里，他叫西西弗斯。",
+      "lines": [
+        "在希腊神话里，",
+        "他叫西西弗斯。"
+      ],
+      "visual": {
+        "shot_id": 6,
+        "time": "30-36",
+        "name": "神话身份",
+        "claim": "这是西西弗斯的故事",
+        "description": "刻满浮雕的古希腊神庙与石柱，碑上西西弗斯之名，浮雕真人推石",
+        "in": "岩石落地变成古代浮雕圆石",
+        "camera": "横移展示神庙、碑刻与刻画的故事",
+        "synchronization": "‘西西弗斯’出现时名字被刻入石碑",
+        "acceptance": "不只是换文字，场景确实不同"
+      }
+    },
+    {
+      "start": 36,
+      "end": 43,
+      "text": "这看起来，是世上最残酷的徒劳。",
+      "lines": [
+        "这看起来，",
+        "是世上最残酷的徒劳。"
+      ],
+      "visual": {
+        "shot_id": 7,
+        "time": "36-43",
+        "name": "徒劳",
+        "claim": "同一份努力被无限复制",
+        "description": "三段不同时刻的浮雕坡道同时运动：上推、坠落、重新上推；以一条旋转的环连接",
+        "in": "刻画中人物逐层苏醒",
+        "camera": "三个时间切片按时间依次亮起",
+        "synchronization": "‘徒劳’不是静态人物+改标题",
+        "acceptance": "至少三个不同状态真实可辨"
+      }
+    },
+    {
+      "start": 43,
+      "end": 50,
+      "text": "可哲学家加缪，却把他看作荒诞的英雄。",
+      "lines": [
+        "可哲学家加缪，",
+        "却把他看作荒诞的英雄。"
+      ],
+      "visual": {
+        "shot_id": 8,
+        "time": "43-50",
+        "name": "加缪的反转",
+        "claim": "为什么称之为英雄",
+        "description": "1942年的书桌、思想者手写；纸页中的推石者从黑色符号逐渐立起成发光轮廓",
+        "in": "神庙石板转为哲学书纸纹理",
+        "camera": "从书桌推近纸页内的西西弗斯",
+        "synchronization": "旁白提到加缪，镜头才出现思想者",
+        "acceptance": "书桌≠原来的人推石构图"
+      }
+    },
+    {
+      "start": 50,
+      "end": 57,
+      "text": "所谓荒诞，是人渴望意义，而世界沉默不答。",
+      "lines": [
+        "所谓荒诞，是人渴望意义，",
+        "而世界沉默不答。"
+      ],
+      "visual": {
+        "shot_id": 9,
+        "time": "50-57",
+        "name": "荒诞冲突",
+        "claim": "人渴望答案，世界没有回应",
+        "description": "左侧一只手朝星图中心的‘为什么’伸出，右侧漆黑宇宙不回馈；一道断裂的光桥",
+        "in": "书页上的问号化成星座",
+        "camera": "镜头沿伸出的手臂飞向空白星海",
+        "synchronization": "人-意义愿望/世界-沉默同屏可见",
+        "acceptance": "不可仅用‘荒诞’两字充当解释"
+      }
+    },
+    {
+      "start": 57,
+      "end": 64,
+      "text": "石头总会落下，这是他无法改变的命运。",
+      "lines": [
+        "石头总会落下，",
+        "这是他无法改变的命运。"
+      ],
+      "visual": {
+        "shot_id": 10,
+        "time": "57-64",
+        "name": "不可改变",
+        "claim": "结果如重力般无法控制",
+        "description": "巨大圆环计时器像引力井般旋转，石头沿斜坡坠下，最终位置标注‘仍归原点’",
+        "in": "星图环形引向真实的下落轨迹",
+        "camera": "镜头俯瞰物理下落+重复",
+        "synchronization": "旁白说‘石头落下’必须正在下落",
+        "acceptance": "镜头表现不可改变而非继续上推"
+      }
+    },
+    {
+      "start": 64,
+      "end": 71,
+      "text": "但下一步是否迈出，仍然由他自己决定。",
+      "lines": [
+        "但下一步是否迈出，",
+        "仍然由他自己决定。"
+      ],
+      "visual": {
+        "shot_id": 11,
+        "time": "64-71",
+        "name": "仍能选择",
+        "claim": "决定的是如何面对",
+        "description": "脚步特写：困在石头阴影下的脚停住，随后主动向石头迈一步；地面留下清晰新脚印",
+        "in": "原点轨迹落为鞋前的尘土",
+        "camera": "从高处拉近靴子、脚印与石头阴影",
+        "synchronization": "旁白说‘迈出’时脚必须迈出",
+        "acceptance": "不是重复推石画面"
+      }
+    },
+    {
+      "start": 71,
+      "end": 78,
+      "text": "他看清了困境，却没有把自己交给绝望。",
+      "lines": [
+        "他看清了困境，",
+        "却没有把自己交给绝望。"
+      ],
+      "visual": {
+        "shot_id": 12,
+        "time": "71-78",
+        "name": "清醒",
+        "claim": "知道处境仍不绝望",
+        "description": "面部极近景，眼睛里映出正在重复下落的巨石；眼睑睁开，黎明反光进入瞳孔",
+        "in": "脚印和瞳孔圆形匹配剪切",
+        "camera": "缓慢推向眼睛，瞳孔明暗变化",
+        "synchronization": "字幕‘看清’配瞳孔，‘绝望’配曙光",
+        "acceptance": "情绪动作特写，而不是又一张远景"
+      }
+    },
+    {
+      "start": 78,
+      "end": 85,
+      "text": "反抗不是保证成功，而是拒绝被结局定义。",
+      "lines": [
+        "反抗不是保证成功，",
+        "而是拒绝被结局定义。"
+      ],
+      "visual": {
+        "shot_id": 13,
+        "time": "78-85",
+        "name": "反抗",
+        "claim": "主动行动不等于获得保证",
+        "description": "充满重量感的侧面中近景：双手重新压上石头，脚后蹬，巨石滚动，岩屑剥落",
+        "in": "瞳孔里的巨石匹配剪切至真实巨石",
+        "camera": "跟拍手、石与蹬地脚，力量从脚传至手",
+        "synchronization": "‘反抗’发生时见到行动开始",
+        "acceptance": "主动作/接触点/音乐打击同步"
+      }
+    },
+    {
+      "start": 85,
+      "end": 90,
+      "text": "这就是，清醒之后，仍然向前。",
+      "lines": [
+        "这就是，清醒之后，",
+        "仍然向前。"
+      ],
+      "visual": {
+        "shot_id": 14,
+        "time": "85-90",
+        "name": "继续向前",
+        "claim": "英雄性在清醒后的持续行动",
+        "description": "极远景：巨大的山脊在朝霞里展开，远方山顶仍遥远；人物和巨石继续缓缓往上，不展示胜利",
+        "in": "中景拉远成宏大远景",
+        "camera": "镜头后撤到人物渐小",
+        "synchronization": "结语与继续向前的身体运动同步",
+        "acceptance": "不可到顶，不可停止站成胜利雕像"
+      }
+    }
+  ],
+  "checks": {
+    "critical": [
+      18,
+      19,
+      20,
+      23,
+      24,
+      57,
+      59,
+      64,
+      66,
+      70,
+      71,
+      74,
+      78,
+      80,
+      84,
+      85,
+      88
+    ],
+    "single_unique_scene_per_cue": true,
+    "mandatoryManualInspection": true
+  }
+}
