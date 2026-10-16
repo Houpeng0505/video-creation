@@ -1,0 +1,68 @@
+name: Render and inspect science film
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'content/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'requirements.txt'
+      - '.github/workflows/render.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: video-render-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install system fonts and media tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: Install pinned dependencies
+        run: |
+          npm install --no-audit --no-fund
+          python -m pip install -r requirements.txt
+          npx remotion browser ensure
+      - name: Structural check and TS validation
+        run: |
+          npm run typecheck
+          python scripts/qc.py --config content/film.json
+      - name: Generate original placeholder soundtrack
+        run: python scripts/generate_score.py --duration 25 --output out/music.wav
+      - name: Render geometry and captions
+        run: npm run render
+      - name: Add music and optional licensed narration
+        run: bash scripts/mix_audio.sh out/silent.mp4 out/music.wav out/final.mp4 public/audio/narration.wav
+      - name: Media inspection and representative frames
+        run: |
+          python scripts/qc.py --config content/film.json --video out/final.mp4
+          ffmpeg -hide_banner -loglevel error -y -i out/final.mp4 -vf "fps=1/2,scale=240:427,tile=4x3" -frames:v 1 out/contact-sheet.jpg
+          ffprobe -v error -show_streams -show_format -of json out/final.mp4 > out/metadata.json
+      - name: Upload final film and QA review materials
+        uses: actions/upload-artifact@v4
+        with:
+          name: science-film-preview
+          path: |
+            out/final.mp4
+            out/contact-sheet.jpg
+            out/metadata.json
+            out/keyframes/*.png
+          retention-days: 14
+          if-no-files-found: error

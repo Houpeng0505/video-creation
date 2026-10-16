@@ -1,0 +1,17 @@
+{
+  "title": "目的与行动",
+  "durationSeconds": 25,
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "theme": "dark-cinematic-ink",
+  "subtitleSafeArea": {"left": 100, "right": 100, "top": 1620, "bottom": 1800},
+  "captions": [
+    {"start": 0.5, "end": 4.5, "text": "一个简单的问题"},
+    {"start": 4.5, "end": 9.0, "text": "人为什么选择行动？"},
+    {"start": 9.0, "end": 14.0, "text": "是被过去推动，还是被目标吸引？"},
+    {"start": 14.0, "end": 19.5, "text": "同一个行为，可以有不同的解释"},
+    {"start": 19.5, "end": 24.5, "text": "目的论：从目标理解行动"}
+  ],
+  "score": {"mood": "minimal Chinese cinematic pentatonic", "bpm": 72, "musicGain": 0.35},
+  "notes": "Demonstration concept, not a full account of Adlerian psychology. Replace copy with medically/factually reviewed script for production."
+}

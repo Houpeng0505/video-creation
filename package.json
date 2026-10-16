@@ -1,0 +1,23 @@
+{
+  "name": "video-creation-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-first Chinese science motion graphics pipeline",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ScienceFilm out/silent.mp4 --codec h264 --crf 19 --concurrency 2 --log=error",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.531",
+    "remotion": "4.0.531",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "typescript": "5.7.3"
+  }
+}
