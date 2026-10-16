@@ -85,7 +85,7 @@ function Shot1({p,t}:P){const x=426+320*ease(p),y=1450-(x-90)*.48-158;return <><
   <path d="M245 360 Q555 270 895 242" stroke="#f6c48c" strokeWidth="2" strokeDasharray="8 17" fill="none" opacity=".5"/>
   <path d="M836 224 l63 18 -39 50" stroke="#f6c48c" strokeWidth="4" fill="none"/>
   <text x="876" y="205" fontFamily={shape} fontSize="31" fill="#e5b993">远处的山顶</text>
-  <Hero x={x-305} y={1450-((x-305)-90)*.48} s={.82} pose="push"/>
+  <Hero x={x-245} y={1450-((x-245)-90)*.48} s={.82} pose="push"/>
   <Stone x={x} y={y} r={158} rot={(x-426)*.36}/>
   {dust(x-160,y+152,p*.5)}</>}
 // 12–18: physically legible extreme close-up of hand, stone and footing
@@ -102,10 +102,10 @@ function Shot2({p,t}:P){const press=Math.sin(t*5)*10;return <><Ink/><Ridge shade
   <text x="208" y="460" fontSize="39" fontFamily={shape} fill="#eac7a2" opacity=".7">每一寸，都要用尽全力</text>
   </>}
 // 18–24: actual fall synchronised to words
-function Shot3({p,t}:P){const u=ease(p),x=862-690*u,y=705+590*u;return <><Ink/><Ridge shade={.65}/>
+function Shot3({p,t}:P){const u=ease(p),x=862-690*u,y=1440-(x+120)*(820/1120)-146;return <><Ink/><Ridge shade={.65}/>
   <path d="M-120 1440 L1000 620 1210 860 V1920 H-120Z" fill="url(#cliff)" stroke="#d8ab86" strokeWidth="8"/>
   <path d="M1000 620 L1100 553 1170 615" stroke="#f9d3a1" strokeWidth="7" fill="none"/>
-  <Hero x={756} y={1040} s={.69} pose="stand"/>
+  <Hero x={970} y={1440-(970+120)*(820/1120)} s={.52} pose="stand"/>
   <path d={'M'+(x+120)+' '+(y-100)+' L'+(x+270)+' '+(y-200)} stroke="#f9c58d" strokeWidth="13" strokeLinecap="round" opacity={.2+.5*u}/>
   <Stone x={x} y={y} r={146} rot={-u*285}/>
   {dust(x+100,y+128,u)}
@@ -188,29 +188,35 @@ function Shot8({p,t}:P){const k=ease(p);return <><Ink/>
   <path d="M675 795 l46 46 M721 795 l-46 46" stroke="#d6b19d" strokeWidth="6" opacity={k}/>
   </>}
 // 57–64: boulder falls *while* narrator says boulder falls
-function Shot9({p,t}:P){const k=ease(p),x=838-612*k,y=620+760*k;return <><Ink/><Ridge shade={.35}/>
+function Shot9({p,t}:P){const k=ease(p),x=838-612*k,y=1560-(x+100)*(1080/1130)-160;return <><Ink/><Ridge shade={.35}/>
   <path d="M-100 1560 L1030 480 L1150 720 V1920 H-100Z" fill="url(#cliff)" stroke="#e2ad83" strokeWidth="9"/>
   <path d="M960 650 Q860 790 600 1050 T130 1430" fill="none" stroke="#edc29b" strokeWidth="5" strokeDasharray="14 20" opacity=".6"/>
   {Array.from({length:3},(_,i)=><circle key={i} cx={x+i*83*k} cy={y-i*110*k} r={118-i*17} fill="none" stroke="#d5b096" strokeWidth="5" opacity={k*.23}/>) }
   <Stone x={x} y={y} r={160} rot={-k*450}/>
   {dust(x+100,y+150,k)}
-  <g transform="translate(665 1040) scale(.58)"><Hero x={0} y={0} s={1} pose="stand"/></g>
+  <g transform="translate(980 527) scale(.45)"><Hero x={0} y={0} s={1} pose="stand"/></g>
   <path d="M820 380 q80 -100 170 -10" fill="none" stroke="#edba8b" strokeWidth="6"/>
   <path d="M982 330 l13 65 -63 -12" fill="none" stroke="#edba8b" strokeWidth="6"/>
   </>}
 // 64–71: choice is explicitly the step: boot lifts and plants
-function Shot10({p,t}:P){const k=ease(p),lift=Math.sin(Math.PI*k)*117;return <><Ink/><Ridge shade={.21}/>
+function Shot10({p,t}:P){
+  const k=ease(p),lift=Math.sin(Math.PI*k)*95;
+  const ankleX=306+260*k,soleY=1300-(ankleX+100)*(.208)-lift;
+  return <><Ink/><Ridge shade={.21}/>
   <path d="M-100 1300 L1150 1040 V1920 H-100Z" fill="url(#cliff)" stroke="#bda185" strokeWidth="9"/>
-  {Array.from({length:3},(_,i)=><g key={i} opacity={.12+.13*i} transform={'translate('+(160+i*160)+' '+(1170-i*40)+')'}>
-    <ellipse cx="0" cy="0" rx="82" ry="25" transform="rotate(-9)" fill="#c49f7c"/>
-    <ellipse cx="37" cy="-66" rx="34" ry="63" transform="rotate(-16 37 -66)" fill="#c49f7c"/></g>)}
-  <path d={'M'+(125+270*k)+' '+(1000-lift)+' Q'+(180+260*k)+' '+(1080-lift)+' '+(270+260*k)+' '+(1085-lift)+' L'+(330+260*k)+' '+(1125-lift)+' L'+(337+260*k)+' '+(1184-lift)+' L'+(135+260*k)+' '+(1170-lift)+'Z'} fill="#433740" stroke="#f4c394" strokeWidth="9"/>
-  <path d={'M'+(240+265*k)+' '+(1113-lift)+' l94 9'} stroke="#f8d1a7" strokeWidth="5"/>
-  <path d={'M'+(485+240*k)+' '+(900-lift)+' l-65 230'} stroke="#262532" strokeWidth="101" strokeLinecap="round"/>
-  <path d={'M'+(485+240*k)+' '+(900-lift)+' l-65 230'} stroke="#c69b7e" strokeWidth="8"/>
-  {dust(460+240*k,1250,k*.8)}
-  <text x="540" y="505" textAnchor="middle" fontSize="61" fontFamily={shape} fill="#ecd0af">结果并非由他决定</text>
-  <text x="540" y="590" textAnchor="middle" fontSize="60" fontFamily={shape} fill="#ffdaab">但这一步是他迈出的</text>
+  {Array.from({length:4},(_,i)=><g key={i} opacity={.12+.10*i} transform={'translate('+(95+i*125)+' '+(1240-i*26)+')'}>
+    <ellipse cx="0" cy="0" rx="72" ry="22" transform="rotate(-10)" fill="#c49f7c"/>
+    <ellipse cx="28" cy="-52" rx="27" ry="50" transform="rotate(-16 28 -52)" fill="#c49f7c"/></g>)}
+  <g transform={'translate('+ankleX+' '+soleY+')'}>
+    <path d="M-130 -570 Q-190 -398 -135 -305 Q-81 -225 -15 -120" fill="none" stroke="#2f2a37" strokeWidth="123" strokeLinecap="round"/>
+    <path d="M-130 -570 Q-190 -398 -135 -305 Q-81 -225 -15 -120" fill="none" stroke="#b68c77" strokeWidth="8" strokeLinecap="round" opacity=".9"/>
+    <path d="M-105 -130 L22 -134 38 -43 126 -23 145 -5 145 19 -105 19 Q-132 -34 -105 -130Z" fill="#59414a" stroke="#efbc8f" strokeWidth="8"/>
+    <path d="M-92 -16 L147 -16" stroke="#ffe0ac" strokeWidth="6"/>
+    <path d="M-70 -115 Q2 -86 35 -70 M-40 -97 L-22 -72 M-16 -99 L-1 -71" stroke="#d8ad8a" strokeWidth="4" fill="none"/>
+  </g>
+  <ellipse cx={ankleX+15} cy={1300-(ankleX+100)*.208+9} rx="129" ry="23" fill="#080e1d" opacity={.37-.17*k}/>
+  {dust(ankleX+57,soleY+9,k*.5)}
+  <text x="540" y="506" textAnchor="middle" fontSize="63" fontFamily={shape} fill="#ffdaa9">这一步，由他自己迈出</text>
   </>}
 // 71–78: enlarged eye and changed perception
 function Shot11({p,t}:P){const k=ease(p);return <><Ink light={k*.56}/>
@@ -228,7 +234,7 @@ function Shot11({p,t}:P){const k=ease(p);return <><Ink light={k*.56}/>
 // 78–85: pushing action; physical exertion, light and grains
 function Shot12({p,t}:P){const k=ease(p),x=540+290*k;const y=1280-(x-220)*.37-185;return <><Ink light={.6+k*.3}/><Ridge shade={.52}/>
   <Ground startY={1390} delta={.37}/>
-  <Hero x={x-339} y={1390-(x-339-90)*.37} s={.90} pose="push" glow={k*.8}/>
+  <Hero x={x-300} y={1390-(x-300-90)*.37} s={.90} pose="push" glow={k*.8}/>
   <Stone x={x} y={y} r={185} rot={k*117} shine={1}/>
   {dust(x-90,y+140,k)}
   {Array.from({length:12},(_,i)=><path key={i} d={'M'+(x-205-i*30)+' '+(y-130+i*17)+' l-80 -24'} fill="none" stroke="#ffddb0" strokeWidth="3" opacity={k*.15}/>)}
