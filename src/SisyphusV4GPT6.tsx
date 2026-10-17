@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,useCurrentFrame,useVideoConfig} from 'remotion';
 import story from '../content/sisyphus_v3.json';
-import {P,terrain,foot,joint,ramp,lerp,clamp,openingState,endingState,stoneRadius,angle} from './sisyphusV4GPT6Motion';
+import {P,terrain,foot,joint,ramp,lerp,clamp,openingState,endingState,stoneRadius,angle,ascent} from './sisyphusV4GPT6Motion';
 
 const C={bg:'#101c2b',night:'#172b3b',ink:'#293e4a',cream:'#eee6d3',gold:'#dfb87b',copper:'#c58265',mint:'#88b9ae',muted:'#91a3a7',red:'#db8c7f'};
 const font="'Microsoft YaHei','Noto Sans CJK SC',sans-serif";
