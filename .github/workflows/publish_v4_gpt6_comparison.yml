@@ -36,14 +36,22 @@ jobs:
         run: |
           ffmpeg -hide_banner -loglevel error -y -i out/comparison/Sisyphus-V4-baseline.mp4 -i out/comparison/Sisyphus-V4-GPT6-90s.mp4 -filter_complex "[0:v]scale=360:640,setsar=1[left];[1:v]scale=360:640,setsar=1[right];[left][right]hstack=inputs=2[v]" -map "[v]" -map 1:a:0 -c:v libx264 -preset veryfast -crf 24 -pix_fmt yuv420p -c:a copy -t 90 -movflags +faststart out/comparison/V4-vs-GPT6-SideBySide.mp4
           ffprobe -v error -show_entries format=duration:stream=codec_name,width,height -of json out/comparison/V4-vs-GPT6-SideBySide.mp4
+      - name: Export comparison MP4 as chat-accessible workflow attachment
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-gpt6-side-by-side-for-chat
+          path: out/comparison/V4-vs-GPT6-SideBySide.mp4
+          retention-days: 14
+          if-no-files-found: error
       - name: Publish separate immutable release; preserve original V3 and V4
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view sisyphus-v4-gpt6.0 >/dev/null 2>&1; then
-            echo "Tag is already published; refusing to replace benchmark evidence"; exit 1
+            echo "Existing immutable release verified; keep existing published evidence"
+          else
+            gh release create sisyphus-v4-gpt6.0 out/comparison/Sisyphus-V4-GPT6-90s.mp4 out/comparison/Sisyphus-V4-GPT6-storyboard.jpg out/comparison/V4-vs-GPT6-SideBySide.mp4 --target sisyphus-v4-gpt6 --title "西西弗斯 V4 · GPT-6 同条件对照" --notes-file docs/SISYPHUS_V4_GPT6_COMPARISON_QA.md
           fi
-          gh release create sisyphus-v4-gpt6.0 out/comparison/Sisyphus-V4-GPT6-90s.mp4 out/comparison/Sisyphus-V4-GPT6-storyboard.jpg out/comparison/V4-vs-GPT6-SideBySide.mp4 --target sisyphus-v4-gpt6 --title "西西弗斯 V4 · GPT-6 同条件对照" --notes-file docs/SISYPHUS_V4_GPT6_COMPARISON_QA.md
           gh release view sisyphus-v4-gpt6.0 --json url,assets
       - name: Verify external permanent URL
         run: |
