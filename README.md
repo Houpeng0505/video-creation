@@ -1,3 +1,9 @@
+# Latest finished video — Sisyphus V3
+
+**[▶ Direct MP4 download (90 seconds, Mandarin narration)](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v3.0/Sisyphus-V3-90s.mp4)** · [14-scene storyboard contact sheet](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v3.0/Sisyphus-V3-storyboard.jpg) · [GitHub Release fallback page](https://github.com/Houpeng0505/video-creation/releases/tag/sisyphus-v3.0)
+
+V3 is the new semantic-first minimalist stick-figure treatment; V2 remains archived. Mobile H264/AAC-compatible, hosted as a Release asset rather than an expiring sandbox or Actions artifact. [Project production skill](.agents/skills/semantic-motion-director/SKILL.md) · [Method report](docs/SEMANTIC_WORKFLOW_V3.md)
+
 # Video Creation Studio
 
 Reusable AI-assisted science animation infrastructure: **Remotion + SVG + FFmpeg + GitHub Actions**.

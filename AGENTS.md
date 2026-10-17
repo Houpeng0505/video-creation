@@ -54,3 +54,6 @@ Potential approaches: Chinese ink cinematic, modern MG, geometric explainer, ill
 Read .agents/skills/science-motion/SKILL.md before producing a science explainer.
 Read .agents/skills/director-critic/SKILL.md for narrative animation, camera choreography and independent frame-review requirements.
 For upstream Remotion guidance: https://github.com/remotion-dev/skills
+
+## Current semantic-first animator preference (2026-10-17)
+Read .agents/skills/semantic-motion-director/SKILL.md before planning any GPT-6-generated narrative explainer; favor smoothly animated clear simple symbols over fussy character/detail rendering. Distinct verbs per cue, frame-strip QA and final GitHub Release delivery are mandatory for finished videos.
