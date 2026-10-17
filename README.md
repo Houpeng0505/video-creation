@@ -1,4 +1,10 @@
-# Latest finished video — Sisyphus V3
+# Latest finished video — Sisyphus V4
+
+**[Direct V4 MP4 download](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v4.0/Sisyphus-V4-90s.mp4)** — 90 seconds, Mandarin, 720×1280 / 30 fps. Refined illustrated landscapes, planted gait, physically consistent rolling direction, staged release and continuous ending. The original V3 audio payload is preserved. [Brief](docs/SISYPHUS_V4_BRIEF.md) · [Reproduce](docs/SISYPHUS_V4_WORKFLOW.md) · [Actual checks and limits](docs/SISYPHUS_V4_QA.md).
+
+V4 has its own composition and source branch; V3 remains intact below.
+
+## Preserved V3
 
 **[▶ Direct MP4 download (90 seconds, Mandarin narration)](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v3.0/Sisyphus-V3-90s.mp4)** · [14-scene storyboard contact sheet](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v3.0/Sisyphus-V3-storyboard.jpg) · [GitHub Release fallback page](https://github.com/Houpeng0505/video-creation/releases/tag/sisyphus-v3.0)
 
