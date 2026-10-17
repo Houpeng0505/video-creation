@@ -192,6 +192,12 @@ const Absurd:React.FC<Shot>=({p})=>{
   {Array.from({length:4},(_,i)=>{const dx=signal*(83+i*64);const alpha=(1-empty)*(.7-i*.15);return <path key={i} d={`M${276+dx} ${552-i*20} q24 -32 48 0`} fill="none" stroke={K.mint} strokeWidth="5" opacity={alpha}/>;})}
   <path d={`M368 633 L${L(368,562,signal)} 633`} stroke={K.gold} strokeWidth="5" strokeDasharray="14 13" opacity={1-empty}/>
   {Array.from({length:15},(_,i)=><circle key={i} cx={391+seed(i)*244} cy={421+seed(i+51)*315} r={1.5+seed(i+7)*3} fill={K.soft} opacity={.12+.13*empty}/>)}
+  {/* An actual travelling unanswered signal, not just a label. */}
+  <circle cx={L(295,553,signal)} cy={L(501,631,signal)} r={17+signal*13} fill={K.gold} opacity={(1-empty)*.92}/>
+  <circle cx={L(295,553,signal)} cy={L(501,631,signal)} r={35+signal*26} fill="none" stroke={K.mint} strokeWidth="4" opacity={(1-empty)*.72}/>
+  <path d={`M295 501 Q408 ${445-21*signal} 555 630`} fill="none" stroke={K.gold} strokeWidth={6+3*signal} strokeDasharray="13 18" opacity={(1-empty)*.87}/>
+  <rect x="60" y="309" width="298" height="540" rx="25" fill={K.deep} opacity={empty*.62}/>
+  <rect x="362" y="309" width={298*empty} height="540" rx="25" fill="#050910" opacity={empty*.91}/>
   <Text x={511} y={713} size={26} color={K.muted} opacity={empty}>······</Text>
   <Text y={923} size={27} color={K.muted} spacing={2}>渴望回应 ↔ 沉默不答</Text>
  </g>;
