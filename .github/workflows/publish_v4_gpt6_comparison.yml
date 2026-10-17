@@ -14,8 +14,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: FFmpeg encoder available
-        run: ffmpeg -version | head -1
+      - name: Install FFmpeg and verify encoder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -1
       - name: Fetch exact verified GPT6 film from completed workflow
         env:
           GH_TOKEN: ${{ github.token }}
