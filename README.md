@@ -1,4 +1,10 @@
-# Latest finished video — Sisyphus V4
+# Latest finished video — Maxwell's Demon
+
+**[Direct MP4 download](https://github.com/Houpeng0505/video-creation/releases/download/maxwell-demon-v1.0/Maxwell-Demon-90s.mp4)** — 90 seconds, Mandarin, 720×1280 / 30 fps. Continuous particle sorting, conditional gate control, finite memory, reset heat, Landauer principle and quantum feedback. [Storyboard and scientific scope](docs/MAXWELL_STORYBOARD.md) · [Actual QA, repairs and limitations](docs/MAXWELL_QA.md).
+
+Independent `MaxwellDemon` composition on the `maxwell-demon` source branch. All Sisyphus versions remain available.
+
+## Sisyphus V4
 
 **[Direct V4 MP4 download](https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v4.0/Sisyphus-V4-90s.mp4)** — 90 seconds, Mandarin, 720×1280 / 30 fps. Refined illustrated landscapes, planted gait, physically consistent rolling direction, staged release and continuous ending. The original V3 audio payload is preserved. [Brief](docs/SISYPHUS_V4_BRIEF.md) · [Reproduce](docs/SISYPHUS_V4_WORKFLOW.md) · [Actual checks and limits](docs/SISYPHUS_V4_QA.md).
 

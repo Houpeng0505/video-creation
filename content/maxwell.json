@@ -1,0 +1,18 @@
+{
+ "title":"麦克斯韦妖：信息真的能打败熵增吗？",
+ "durationSeconds":90,"fps":30,"width":720,"height":1280,"voice":"zh-CN-YunxiNeural",
+ "captions":[
+  {"start":0,"end":7,"text":"如果一个小妖怪，能看出每个分子的快慢，精准开关一扇门呢？","lines":["如果能看清每个分子的快慢，","再精准开关一扇门呢？"],"action":"Reveal mixed gas, velocity trails and demon's scanning eye"},
+  {"start":7,"end":13,"text":"麦克斯韦设想：把气体隔成两边，让妖怪守住小门。","lines":["麦克斯韦设想：把气体隔成两边，","让妖怪守住小门。"],"action":"Establish partition and gate, highlight the controller"},
+  {"start":13,"end":23,"text":"快的，放到右边；慢的，留在左边。每次开门，都跟着它的判断。","lines":["快的放到右边，慢的留在左边。","判断之后，才开门放行。"],"action":"Observe candidate, classify velocity, open gate, pass allowed molecule; reject unwanted arrivals"},
+  {"start":23,"end":30,"text":"反复筛选，右边更热，左边更冷。看起来，温差凭空出现了。","lines":["右边更热，左边更冷。","看起来，温差凭空出现了。"],"action":"Continue sorting; paired kinetic-energy gauges diverge"},
+  {"start":30,"end":37,"text":"只看气体，熵似乎降低了。没有付出代价，就能用温差做功？","lines":["只看气体，熵似乎降低了。","难道能免费用温差做功？"],"action":"Highlight gas-only boundary and an imagined temperature-driven rotor"},
+  {"start":37,"end":43,"text":"第二定律被推翻了吗？问题在于，我们漏算了妖怪。","lines":["第二定律被推翻了吗？","我们还漏算了妖怪。"],"action":"Widen accounting boundary toward controller and its memory"},
+  {"start":43,"end":49,"text":"它得先测量分子，再把结果写进记忆：快，还是慢。","lines":["先测量，再记录：","这个分子，是快还是慢？"],"action":"Trace an actual observed molecule to a memory cell, label bit 1/0"},
+  {"start":49,"end":56,"text":"每次判断，都留下记录。记忆有限，写满后就得停下来。","lines":["每次判断，都留下记录。","记忆写满，控制器暂停。"],"action":"Fill 16 cells from sampled molecule identities and close gate on memory full"},
+  {"start":56,"end":63,"text":"想持续循环，就得把记忆复位，让不同记录都回到同一个零。","lines":["想持续循环，就得复位记忆，","让不同记录都回到同一个零。"],"action":"Stop recording, trigger reset sweep, converge possible records to zero"},
+  {"start":63,"end":71,"text":"不可逆擦除，会把热排进环境。兰道尔原理，给出了理想下限。","lines":["不可逆擦除，把热排进环境。","兰道尔原理给出了理想下限。"],"action":"Zoom one bit: both possible states reset to zero; heat reaches bath"},
+  {"start":71,"end":79,"text":"把气体、妖怪、记忆和环境一起算，完整循环的平均总熵并不减少。","lines":["把气体、妖怪、记忆和环境一起算，","完整循环的平均总熵并不减少。"],"action":"Enclose complete cycle and join gas decrease with environmental entropy increase"},
+  {"start":79,"end":90,"text":"信息有物理代价。从统计物理，到量子测量与反馈控制，它仍在追问：我们知道了什么，又为此付出了什么？","lines":["从统计物理，到量子测量与反馈控制，","信息，仍然连接着认识与代价。"],"action":"Transform controller-memory-bath loop into modern measurement-feedback loop; resolve information-is-physical thesis"}
+ ]
+}
