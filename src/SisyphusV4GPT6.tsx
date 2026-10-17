@@ -20,7 +20,7 @@ function Boulder({s,rotation=0,r=stoneRadius,h=r,color=C.gold}:{s:number;rotatio
  </g></g>;
 }
 
-function Person({s,rock,walk=true,gait=1,aside=0,release=0,scale=1,color=C.cream,brace=0}:{s:number;rock?:number;walk?:boolean;gait?:number;aside?:number;release?:number;scale?:number;color?:string;brace?:number}){
+function Person({s,rock,walk=true,gait=1,aside=0,release=0,scale=1,color=C.cream,brace=0,avoid=0}:{s:number;rock?:number;walk?:boolean;gait?:number;aside?:number;release?:number;scale?:number;color?:string;brace?:number;avoid?:number}){
  const amount=walk?gait:0,fa=foot(s,0),fb=foot(s,.5);
  // Each stance foot is defined in slope world coordinates and NEVER blended toward the hip.
  // Rendering-side gait easing is reserved for arm swing and torso compression.
@@ -29,12 +29,12 @@ function Person({s,rock,walk=true,gait=1,aside=0,release=0,scale=1,color=C.cream
  // Arm and shoulder follow release, but contact is still computed from the rock's surface.
  const tr=(ss:number,hh:number)=>terrain(s+(ss-s)*scale,(hh*scale)+aside);
  const upright=rock===undefined?1:release;
- const hip=tr(s-5,56+11*upright+bob),shoulder=tr(s+lerp(15,1,upright)+8*brace,99+11*upright+bob-9*brace);
- const head=tr(s+lerp(15,1,upright)+6*brace,127+11*upright+bob-5*brace);
+ const hip=tr(s-5,56+11*upright+bob),shoulder=tr(s+lerp(15,1,upright)+8*brace-15*avoid,99+11*upright+bob-9*brace+8*avoid);
+ const head=tr(s+lerp(15,1,upright)+6*brace-17*avoid,127+11*upright+bob-5*brace+13*avoid);
  const a=tr(f1.s,f1.h),b=tr(f2.s,f2.h);
  const ka=joint(hip,a,36*scale,37*scale,-1),kb=joint(hip,b,36*scale,37*scale,-1);
  const swing=Math.sin(s/62*Math.PI*2)*18*amount;
- const rest=tr(s+9+swing,66);
+ const rest=tr(s+9+swing-24*avoid,66+21*avoid);
  const contact=rock!==undefined?terrain(rock-stoneRadius*Math.sqrt(1-.37**2),stoneRadius*1.37):rest;
  const hand={x:lerp(contact.x,rest.x,release),y:lerp(contact.y,rest.y,release)};
  const backShoulder={x:shoulder.x-5,y:shoulder.y+7};
@@ -79,7 +79,7 @@ function Ascent({t,ending=false}:{t:number;ending?:boolean}){
  <Landscape t={t} ledge={!ending}/>
  {!ending&&t<6&&<g opacity={1-ramp(t,4.7,6)}>{[140,245,350,455,560].map((x,i)=><path key={i} d={`M${x} ${lerp(900,394,ramp(t,.3+i*.18,2.3+i*.18))}V913`} stroke={C.copper} strokeWidth="2" opacity=".5"/>)}<path d="M114 908H604" stroke={C.copper} strokeWidth="3" opacity={ramp(t,.8,3.5)}/></g>}
  <path d={`${line(terrain(98,-22),terrain(st.stone,-22))}`} stroke={ending?C.mint:C.gold} strokeWidth="4" strokeLinecap="round" opacity=".65"/>
- <Person s={st.person} rock={st.released?undefined:st.stone} aside={st.aside} release={release} brace={!ending?ramp(t,16.7,17.3)*(1-ramp(t,17.75,18.25)):0} walk={ending||t>=6&&t<17.55} gait={ending?ramp(t,78.7,79.3):ramp(t,6,6.4)*(1-ramp(t,17.15,17.55))}/>
+ <Person s={st.person} rock={st.released?undefined:st.stone} aside={st.aside} release={release} brace={!ending?ramp(t,16.7,17.3)*(1-ramp(t,17.75,18.25)):0} avoid={!ending?ramp(t,17.7,18.0)*(1-ramp(t,18.92,19.65)):0} walk={ending||t>=6&&t<17.55} gait={ending?ramp(t,78.7,79.3):ramp(t,6,6.4)*(1-ramp(t,17.15,17.55))}/>
  <Boulder s={st.stone} rotation={st.rotation} color={!ending&&t>18.35?C.copper:C.gold}/>
  {!ending&&t>=17.7&&t<=20.0&&<g opacity={.5*(ramp(t,17.7,18.0))*(1-ramp(t,19.1,20.0))}><path d={`${line(terrain(ascent(17.7)-109,14),terrain(ascent(17.7)-69,120))}`} fill="none" stroke={C.mint} strokeWidth="2" strokeDasharray="5 8"/></g>}
  {!ending&&t>18.35&&<g opacity={ramp(t,18.35,19)*(1-ramp(t,23,24))}>{Array.from({length:9},(_,i)=>{const q=clamp((t-18.35)*1.5-i*.1);const p=terrain(st.stone+35+i*8,5+Math.sin(q*Math.PI)*18);return <circle key={i} cx={p.x} cy={p.y} r={1.5+(i%3)} fill={C.copper} opacity={.3}/>;})}</g>}
