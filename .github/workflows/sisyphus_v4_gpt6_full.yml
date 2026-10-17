@@ -1,0 +1,66 @@
+name: Sisyphus V4 GPT-6 complete 90s comparative film
+on:
+  push:
+    branches: [sisyphus-v4-gpt6]
+    paths:
+      - '.github/workflows/sisyphus_v4_gpt6_full.yml'
+      - 'scripts/sisyphus_v4_gpt6_independent_test.cjs'
+      - 'src/SisyphusV4GPT6.tsx'
+      - 'src/sisyphusV4GPT6Motion.ts'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sisyphus-v4-gpt6-complete
+  cancel-in-progress: true
+jobs:
+  complete:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: System dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: JS and review tools
+        run: |
+          npm ci --no-audit --no-fund
+          python -m pip install pillow numpy
+          npx remotion browser ensure
+      - name: Exact geometric invariants and pinned TS composition
+        run: |
+          npm run typecheck
+          node scripts/sisyphus_v4_gpt6_independent_test.cjs
+      - name: Fetch the identical V3 Mandarin original soundtrack
+        run: |
+          mkdir -p out/reference
+          curl -fL --retry 5 --retry-delay 2 -o out/reference/Sisyphus-V3-90s.mp4 https://github.com/Houpeng0505/video-creation/releases/download/sisyphus-v3.0/Sisyphus-V3-90s.mp4
+          ffprobe -v error -show_entries stream=codec_name -select_streams a -of default=noprint_wrappers=1 out/reference/Sisyphus-V3-90s.mp4
+      - name: Render complete unchanged-voice 90s film, 30 fps
+        run: |
+          mkdir -p out/gpt6_complete
+          npx remotion render src/index.ts SisyphusV4GPT6 out/gpt6_complete/silent.mp4 --codec h264 --crf 18 --concurrency 2 --log=error
+      - name: Combine new visual with bit-identical original AAC audio
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -i out/gpt6_complete/silent.mp4 -i out/reference/Sisyphus-V3-90s.mp4 -map 0:v:0 -map 1:a:0 -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 -r 30 -c:a copy -t 90 -movflags +faststart out/gpt6_complete/Sisyphus-V4-GPT6-90s.mp4
+      - name: Decode 2700 frames, 360 evenly-spaced samples, 242 boundary frames
+        run: |
+          python scripts/sisyphus_v4_qc.py out/gpt6_complete/Sisyphus-V4-GPT6-90s.mp4 --review out/gpt6_complete/review
+      - name: Archive full movie and visual review proof (not a final creative signoff)
+        uses: actions/upload-artifact@v4
+        with:
+          name: sisyphus-v4-gpt6-complete-review
+          path: |
+            out/gpt6_complete/Sisyphus-V4-GPT6-90s.mp4
+            out/gpt6_complete/review/*.jpg
+            out/gpt6_complete/review/*.json
+          if-no-files-found: error
+          retention-days: 14
