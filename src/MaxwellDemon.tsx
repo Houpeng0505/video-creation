@@ -15,7 +15,7 @@ const chapters=[
  [0,6,'01 / 思想实验','谁能看透每个分子的速度？','一个近乎全知的微型守门者'],
  [6,12,'01 / 思想实验','一扇门，一个守门者','它只需要判断：快，还是慢'],
  [12,18,'01 / 思想实验','最初：冷热混杂','两边分子随机运动'],
- [18,24,'02 / 筛选','先观察，再放行','快速粒子经过时，小门打开'],
+ [18,24,'02 / 筛选','测量速度，再决定通行','快的放行，慢的被挡住'],
  [24,30,'02 / 筛选','快的向右，慢的留左','通行权限，由速度决定'],
  [30,36,'02 / 筛选','温差，竟然出现了','热的一边 · 冷的一边'],
  [36,42,'03 / 悖论','不推动活塞，也能分出冷热？','看起来不需要额外做功'],
@@ -31,12 +31,14 @@ const Header=({t}:{t:number})=>{const a=chapters.find(c=>t>=c[0]&&t<c[1])||chapt
 const Chamber=({t}:{t:number})=>{const sorting=ramp(t,28,35),door=doorOpen(t);return <g>
  <rect x="102" y="392" width="516" height="438" rx="21" fill="#0b2130" stroke={C.frame} strokeWidth="3"/>
  <rect x="109" y="399" width="243" height="422" rx="12" fill={C.cold} opacity={.02+sorting*.17}/><rect x="369" y="399" width="242" height="422" rx="12" fill={C.warm} opacity={.02+sorting*.17}/>
- {molecules.map(m=>{const pos=ambient(m,t),wrong=(m.side==='right'&&m.kind==='slow')||(m.side==='left'&&m.kind==='fast');return <Particle key={m.id} x={pos.x} y={pos.y} kind={m.kind} alpha={(1-(wrong ? .66*sorting : 0))*.78} vel={m.vx*.22} r={m.kind==='fast'?8.6:7.4}/>})}
+ {molecules.map(m=>{const pos=ambient(m,t),wrong=(m.side==='right'&&m.kind==='slow')||(m.side==='left'&&m.kind==='fast');return <Particle key={m.id} x={pos.x} y={pos.y} kind={m.kind} alpha={(1-(wrong?.66*sorting:0))*.78} vel={m.vx*.22} r={m.kind==='fast'?8.6:7.4}/>})}
  <rect x="352" y="392" width="16" height="186" rx="5" fill={C.frame}/><rect x="352" y="642" width="16" height="188" rx="5" fill={C.frame}/>
- <rect x="351" y={610-32*(1-door)} width="18" height={64*(1-door)} rx="3" fill={door>.5?C.mint:C.red}/>
+ <rect x="351" y={578-34*door} width="18" height="32" rx="3" fill={door>.5?C.mint:C.red}/>
+ <rect x="351" y={610+34*door} width="18" height="32" rx="3" fill={door>.5?C.mint:C.red}/>
  <circle cx="360" cy="548" r="7" fill={door>.5?C.mint:C.red}/><circle cx="360" cy="548" r={14+door*9} stroke={door>.5?C.mint:C.red} strokeWidth="2" fill="none" opacity=".5"/>
+ {t>=18&&t<29.2&&packets.filter(p=>packetState(p,t).active && Math.abs(packetState(p,t).x-360)<155).map(p=>{const pos=packetState(p,t);return <g key={p.id} opacity={.24+.28*Math.sin(t*8)**2}><Path d={line(360,365,pos.x,pos.y-16)} stroke={p.kind==='fast'?C.gold:C.cold} sw={2} dash="5 10"/><circle cx={pos.x} cy={pos.y} r="29" fill="none" stroke={p.kind==='fast'?C.gold:C.cold} strokeWidth="1.5" strokeDasharray="5 8"/></g>})}
  {t>=18&&t<29.2&&packets.map(p=>{const v=packetState(p,t),alpha=ramp(t,p.start-.17,p.start+.20)*(1-ramp(t,p.end-.08,p.end+.31));const color=p.kind==='fast'?C.warm:C.cold;return <g key={p.id} opacity={alpha}><circle cx={v.x} cy={v.y} r="25" fill="none" stroke={color} strokeWidth="2" strokeDasharray="3 6" opacity=".64"/><Particle x={v.x} y={v.y} kind={p.kind} r={14} vel={p.from<p.to?33:-33}/><Text x={v.x} y={v.y-31} size={18} color={color} weight={700}>{p.kind==='fast'?'快':'慢'}</Text></g>})}
- <Demon t={t}/><Text x={220} y={866} size={21} color={C.cold}>左边：低速</Text><Text x={500} y={866} size={21} color={C.warm}>右边：高速</Text>
+ <Demon t={t}/><Text x={220} y={866} size={21} color={C.cold}>{t<30?"左区":"左区 · 偏冷"}</Text><Text x={500} y={866} size={21} color={C.warm}>{t<30?"右区":"右区 · 偏热"}</Text>
  {t>=18&&t<30&&<Text y={924} size={20} color={door>.6?C.mint:C.muted}>{door>.6?'✓ 识别成功：开门':'眼睛测量速度 · 门保持关闭'}</Text>}
  {t>=30&&<g opacity={ramp(t,30.5,32)}><Path d="M235 910H485" stroke={C.gold} sw={2}/><Text x={214} y={952} size={23} color={C.cold}>冷 ↓</Text><Text x={500} y={952} size={23} color={C.warm}>热 ↑</Text></g>}
  </g>};
