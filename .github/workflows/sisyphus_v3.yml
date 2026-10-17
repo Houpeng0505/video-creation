@@ -1,0 +1,63 @@
+name: Sisyphus V3 — semantic-first vector film
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/SisyphusV3.tsx'
+      - 'src/Root.tsx'
+      - 'content/sisyphus_v3.json'
+      - 'scripts/sisyphus_v3_qc.py'
+      - '.github/workflows/sisyphus_v3.yml'
+permissions:
+  contents: read
+concurrency:
+  group: sisyphus-v3-main
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install fonts and FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: Install pinned Remotion and TTS components
+        run: |
+          npm install --no-audit --no-fund
+          python -m pip install -r requirements.txt "edge-tts>=7,<10" "pydub==0.25.1"
+          npx remotion browser ensure
+      - name: Compile all scenes and check cue contract
+        run: |
+          npm run typecheck
+          python3 -c "import json; c=json.load(open('content/sisyphus_v3.json')); assert len(c['captions'])==14"
+      - name: Generate Mandarin speech and event-aligned score
+        run: python scripts/sisyphus_audio.py --v2
+      - name: Render 90 second semantic motion film
+        run: |
+          mkdir -p out
+          npx remotion render src/index.ts SisyphusV3 out/v3_silent.mp4 --codec h264 --crf 20 --concurrency 2 --log=error
+      - name: Mix music with Mandarin speech
+        run: bash scripts/mix_audio.sh out/v3_silent.mp4 out/sisyphus_music.wav out/sisyphus_v3.mp4 out/sisyphus_voice.wav
+      - name: Real MP4 temporal samples and QC
+        run: python3 scripts/sisyphus_v3_qc.py
+      - name: Publish evaluation package with movie and dense frames
+        uses: actions/upload-artifact@v4
+        with:
+          name: sisyphus-v3-semantic-animation
+          path: |
+            out/sisyphus_v3.mp4
+            out/v3_review/*.jpg
+            out/v3_review/*.json
+            out/v3_review/*.png
+            out/sisyphus_voice_report.json
+          retention-days: 14
+          if-no-files-found: error
