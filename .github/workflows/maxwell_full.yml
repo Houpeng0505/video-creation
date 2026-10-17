@@ -1,0 +1,67 @@
+name: Maxwell Demon - complete 90s Chinese physics explainer
+on:
+  push:
+    branches: [maxwell-demon-gpt6]
+    paths:
+      - '.github/workflows/maxwell_full.yml'
+      - 'src/MaxwellDemon.tsx'
+      - 'content/maxwell_demon.json'
+      - 'scripts/maxwell_audio.py'
+      - 'scripts/maxwell_qc.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: maxwell-complete-90s
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FFmpeg and Chinese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: Install Remotion and audio/QA packages
+        run: |
+          npm install --no-audit --no-fund
+          python -m pip install --disable-pip-version-check "numpy>=1.26,<3" "pillow>=10,<13" "pydub==0.25.1" "edge-tts>=7,<10"
+          npx remotion browser ensure
+      - name: Physical motion invariants and TypeScript validity
+        run: |
+          npm run typecheck
+          node scripts/maxwell_motion_test.cjs
+      - name: Generate original narration and music with TTS
+        run: python scripts/maxwell_audio.py
+      - name: Render 2700 frames at 720x1280 / 30 fps
+        run: |
+          mkdir -p out/maxwell
+          npx remotion render src/index.ts MaxwellDemon out/maxwell/silent.mp4 --codec h264 --crf 18 --concurrency 2 --log=error
+      - name: Mix original speech and soundtrack; encode yuv420p video
+        run: |
+          bash scripts/mix_audio.sh out/maxwell/silent.mp4 out/maxwell/music.wav out/maxwell/mixed.mp4 out/maxwell/voice.wav
+          ffmpeg -hide_banner -loglevel error -y -i out/maxwell/mixed.mp4 -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 -r 30 -c:a copy -t 90 -movflags +faststart out/maxwell/Maxwell-Demon-90s.mp4
+      - name: Decode film, verify voice and inspect all 14 dense cue strips
+        run: |
+          python scripts/maxwell_qc.py out/maxwell/Maxwell-Demon-90s.mp4 --review out/maxwell/review
+          ffprobe -v error -show_streams -show_format -of json out/maxwell/Maxwell-Demon-90s.mp4 > out/maxwell/metadata.json
+      - name: Upload user deliverable and actual QA images
+        uses: actions/upload-artifact@v4
+        with:
+          name: maxwell-demon-90s-rendered-mp4
+          path: |
+            out/maxwell/Maxwell-Demon-90s.mp4
+            out/maxwell/voice_report.json
+            out/maxwell/metadata.json
+            out/maxwell/review/*.jpg
+            out/maxwell/review/*.json
+          if-no-files-found: error
+          retention-days: 14
