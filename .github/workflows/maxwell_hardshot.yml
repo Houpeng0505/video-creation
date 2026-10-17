@@ -24,14 +24,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
       - name: Install CJK fonts and FFmpeg
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-noto-cjk
       - name: Install pinned React/Remotion
         run: |
-          npm ci --no-audit --no-fund
+          npm install --no-audit --no-fund
           npx remotion browser ensure
       - name: Typecheck and molecule/gate invariants
         run: |
