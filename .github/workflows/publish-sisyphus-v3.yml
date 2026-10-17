@@ -1,0 +1,61 @@
+name: Publish Sisyphus V3 permanent video
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-sisyphus-v3.yml'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Install multimedia tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Retrieve verified V3 film and 14-shot contact sheet
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p /tmp/v3-release
+          gh run download 39020098283 --name sisyphus-v3-semantic-animation --dir /tmp/v3-release
+          test -s /tmp/v3-release/sisyphus_v3.mp4
+          test -s /tmp/v3-release/v3_review/scene_sheet.jpg
+      - name: Re-encode MP4 for maximum Android and mobile browser compatibility
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -i /tmp/v3-release/sisyphus_v3.mp4 \
+            -c:v libx264 -pix_fmt yuv420p -profile:v main -level 3.1 \
+            -preset medium -crf 21 \
+            -c:a aac -ar 48000 -ac 2 -b:a 128k \
+            -movflags +faststart /tmp/v3-release/Sisyphus-V3-90s.mp4
+          cp /tmp/v3-release/v3_review/scene_sheet.jpg /tmp/v3-release/Sisyphus-V3-storyboard.jpg
+          ffprobe -v error -show_entries format=duration,size -of default=nw=1 /tmp/v3-release/Sisyphus-V3-90s.mp4
+      - name: Publish public release with persistent direct URLs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if gh release view sisyphus-v3.0 >/dev/null 2>&1; then
+            gh release upload sisyphus-v3.0 /tmp/v3-release/Sisyphus-V3-90s.mp4 /tmp/v3-release/Sisyphus-V3-storyboard.jpg --clobber
+          else
+            gh release create sisyphus-v3.0 \
+              /tmp/v3-release/Sisyphus-V3-90s.mp4 \
+              /tmp/v3-release/Sisyphus-V3-storyboard.jpg \
+              --target "${GITHUB_SHA}" \
+              --title "西西弗斯 V3 · 90秒极简语义动画" \
+              --notes "重新依据极简矢量、表意精确、流畅运动与逐镜审查规则制作。14个旁白段落各有可见动作，配中文旁白和原创合成配乐。已核验全部场景与巨石滚落、轮回、选择、反抗的关键帧。1080逻辑画布，720x1280导出；标准 H.264/yuv420p + AAC 48kHz。无需使用ChatGPT临时附件下载。"
+          fi
+          gh release view sisyphus-v3.0 --json url,assets
+      - name: Verify the permanent public URLs are reachable
+        run: |
+          VIDEO="https://github.com/${GITHUB_REPOSITORY}/releases/download/sisyphus-v3.0/Sisyphus-V3-90s.mp4"
+          IMAGE="https://github.com/${GITHUB_REPOSITORY}/releases/download/sisyphus-v3.0/Sisyphus-V3-storyboard.jpg"
+          curl -fsSIL --max-time 60 "$VIDEO" -o /tmp/v3-video-head.txt
+          curl -fsSIL --max-time 60 "$IMAGE" -o /tmp/v3-image-head.txt
+          echo "Verified MP4: $VIDEO"
+          echo "Verified contact sheet: $IMAGE"
