@@ -11,6 +11,20 @@ Never write video artifacts or workflows into unrelated repositories (e.g. Ortho
 - Technical implementation may change by project. Remotion is the working baseline, not a mandate to use SVG or 9:16 for every output.
 - When no visual direction is specified, select a suitable direction based on the script; document it in a short style brief instead of assuming Chinese aesthetics.
 
+## Preferred production strategy with limited vector rendering capacity
+
+**Optimize for explanatory precision and fluidity, NOT high-density character illustration.**
+When using ChatGPT/GPT-6 as the code animator with no vetted, rigged character assets, deliberately choose a simplified graphic vocabulary (stick figures, silhouettes, dots, lines, arrows, contours, clean motion diagrams). This is a strategic quality upgrade, not permission to lower production standards.
+
+- Spend the complexity budget on **story beats, spatial causality, timing, choreography, camera rhythm and conceptual clarity**, not facial anatomy, cloth folds, musculature or faux-3D textures.
+- A stick figure moving naturally and communicating cause and effect is better than a detailed but stiff mannequin. Even simple figures need correct joint anchors, readable gestures and non-teleporting world state.
+- Do not interpret "minimalist" as static drawings plus slides: objects should change meaningfully on screen in ways synchronized with narration. Motion must **explain** the concept, not decorate the background.
+- For each spoken claim, define a visible event, exact onset/peak/end times, before-and-after states, transition rationale and a visual acceptance test; use cutaways, symbolic diagrams or abstraction when movement of a detailed character would add no explanatory value.
+- Prototype the most demanding **6–10 seconds** at full intended motion cadence before committing to a long film. Review 0.2–0.5s sequential frame strips and the actual encoded playback, not only a sparse contact sheet.
+- Reduce *irrelevant vector detail*, not **narrative information**, temporal resolution, scene transitions or QC scrutiny. Frame-rendered paths are fine; 30/60fps delivery selected by intended movement, with smooth interpolation and deliberate holds.
+- Never reflexively force 3D/Blender, sophisticated anatomy, Chinese aesthetics, continuous camera, or one transition style onto all films. Use a per-video brief; choose flat 2D symbolic storytelling when that best suits the project.
+- The specific strategy is detailed in docs/SEMANTIC_MOTION.md.
+
 ## Mandatory process
 1. Identify the scientific/educational thesis, supporting sources, audience, delivery platform, resolution, aspect ratio, language and desired tone.
 2. Create a per-project style brief (color palette, type, illustration/3D approach, movement grammar, references, audio approach). If the brief leaves style open, select a coherent fit for the content.

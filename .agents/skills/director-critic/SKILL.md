@@ -32,6 +32,12 @@ Objects that recur must have persistent identities and world-space state (coordi
 - Use measured speech durations, leaving 250–400ms breathing space per cue.
 - Don't fix soundtrack genre by default; the current film's original synth is specific to its subject.
 
+## Semantic fluidity is more important than vector density
+
+For projects rendered from procedural vector shapes without sophisticated character assets, do **not** spend the majority of development time fabricating anatomical detail. Simplify the character to readable stick figures or silhouettes and reinvest effort into motion arc, camera, pacing and explanatory diagrams. Simplicity is not a waiver from correct staging, hand/stone anchors, safe caption placement or rigorous semantic review.
+
+Reviewer must explicitly answer per voiced cue: "If subtitles were hidden, would the visible action explain the idea?" and "Does the relevant action start within the narrated interval?". Inspect short adjacent-frame strips to identify jerks, popping, float and slippage. Flag static shots whose only changes are text, dust, light, or slow drift **unless the script deliberately requires stillness**. Check emotional and conceptual impact through sequential visual causality, not count of cuts.
+
 ## Independent reviewer instructions
 The reviewer must not infer quality solely from a successful render.
 Inspect the contact sheet *and* full-scale crops (text, hand/rock contact, feet/slope, object exits).
