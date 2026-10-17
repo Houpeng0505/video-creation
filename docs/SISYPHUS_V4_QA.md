@@ -42,3 +42,6 @@ Factual story, deliberate continuity, object linkage, captions, purposeful camer
 Review was performed by the authoring agent; no separate reviewer or audience study was used. The acting remains symbolic, especially the short ledge jump and simplified hands. The movie is not photorealistic or a rigid-body simulation. Full 90-second real-time audiovisual listening has not been performed; do not inflate image and packet checks into that claim. The remaining limitation does not invalidate the requested dense full-shot image review or unchanged original narration timeline.
 
 The local Remotion Studio endpoint returned `getRenderQueue is not a function` on this pinned version. Offline rendering succeeded; a separate plain HTML MP4 player provides playback/download without changing the production dependency versions.
+
+## Delivery verification
+Published a separate `sisyphus-v4.0` release and downloaded its public MP4 URL again without authentication; its SHA256 matches the accepted artifact. Also used the browser's actual download control to save `Sisyphus-V4-90s.mp4` into the user's Downloads directory; that copy has the same SHA256. V3 release remains intact. The local delivery player uses `scripts/preview_sisyphus_v4.py` for byte-range requests so chapter seeking works.

@@ -36,5 +36,5 @@ assets=[]
 for path,name,mime in [(movie,'Sisyphus-V4-90s.mp4','video/mp4'),(story,'Sisyphus-V4-storyboard.jpg','image/jpeg')]:
  upload=release['upload_url'].split('{')[0]+'?name='+name
  asset=api(upload,'POST',path.read_bytes(),mime);assets.append({'name':name,'size':asset['size'],'url':asset['browser_download_url']})
-api(base+'/releases/'+str(release['id']),'PATCH',{'draft':False})
-print(json.dumps({'published':True,'assets':assets},ensure_ascii=False))
+published=api(base+'/releases/'+str(release['id']),'PATCH',{'draft':False})
+print(json.dumps({'published':True,'assets':[{'name':a['name'],'size':a['size'],'url':a['browser_download_url']} for a in published['assets']]},ensure_ascii=False))
