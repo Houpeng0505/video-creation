@@ -1,0 +1,56 @@
+name: Sisyphus V4 GPT6 difficult shot first
+on:
+  push:
+    branches: [sisyphus-v4-gpt6]
+    paths:
+      - 'src/SisyphusV4GPT6.tsx'
+      - 'src/sisyphusV4GPT6Motion.ts'
+      - 'src/Root.tsx'
+      - 'scripts/sisyphus_v4_gpt6_independent_test.cjs'
+      - '.github/workflows/sisyphus_v4_gpt6_prototype.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: v4-gpt6-prototype
+  cancel-in-progress: true
+jobs:
+  hardest-shot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install media and fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+      - name: Install locked runtime
+        run: |
+          npm ci --no-audit --no-fund
+          npx remotion browser ensure
+      - name: Validate typing and independent physical invariants
+        run: |
+          npm run typecheck
+          node scripts/sisyphus_v4_gpt6_independent_test.cjs
+      - name: Render first 8-second shot at original film time 16 to 24
+        run: |
+          mkdir -p out/v4_gpt6_hardshot
+          npx remotion render src/index.ts SisyphusV4GPT6 out/v4_gpt6_hardshot/hardshot_16-24.mp4 --frames=480-719 --codec h264 --crf 17 --concurrency 2 --log=error
+      - name: Decode motion at 0.25s and export enlarged native frames
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -i out/v4_gpt6_hardshot/hardshot_16-24.mp4 -vf "fps=4,scale=180:320,tile=8x4" -frames:v 1 out/v4_gpt6_hardshot/every_025s.jpg
+          for f in 0 18 30 50 60 69 80 97 110 130 158 182 218 239; do
+            ffmpeg -hide_banner -loglevel error -y -i out/v4_gpt6_hardshot/hardshot_16-24.mp4 -vf "select=eq(n\\,$f)" -vsync 0 -frames:v 1 "out/v4_gpt6_hardshot/full_$f.png"
+          done
+          ffprobe -v error -show_streams -show_format -of json out/v4_gpt6_hardshot/hardshot_16-24.mp4 > out/v4_gpt6_hardshot/probe.json
+          python3 -c "import json; d=json.load(open('out/v4_gpt6_hardshot/probe.json')); assert 7.95<float(d['format']['duration'])<8.05; assert any(s.get('width')==720 and s.get('height')==1280 for s in d['streams']); print('TECHNICAL PASS: still requires image QA')"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v4-gpt6-hardshot-first-pass
+          path: out/v4_gpt6_hardshot/**
+          if-no-files-found: error
+          retention-days: 14
